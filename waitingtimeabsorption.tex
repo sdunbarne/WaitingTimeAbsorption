@@ -1,0 +1,1665 @@
+%%% -*-LaTeX-*-
+%%% waitingtimeabsorbtion.tex
+%%% Prettyprinted by texpretty lex version 0.02 [21-May-2001]
+%%% on Tue Apr  5 09:40:08 2022
+%%% for Steve Dunbar (sdunbar@family-desktop)
+
+\documentclass[12pt]{article}
+
+\input{../../../../etc/macros}
+%% \input{../../../../etc/mzlatex_macros}
+\input{../../../../etc/pdf_macros}
+
+\bibliographystyle{plain}
+
+\begin{document}
+
+\myheader \mytitle
+
+\hr
+
+\sectiontitle{Waiting Time to Absorption}
+
+\hr
+
+\usefirefox
+
+\hr
+
+% \visual{Study Tip}{../../../../CommonInformation/Lessons/studytip.png}
+% \section*{Study Tip}
+
+% \hr
+
+\visual{Rating}{../../../../CommonInformation/Lessons/rating.png}
+\section*{Rating} %one of
+% Everyone: contains no mathematics.
+% Student: contains scenes of mild algebra or calculus that may require guidance.
+Mathematically Mature:  may contain mathematics beyond calculus with
+proofs.  % Mathematicians Only: prolonged scenes of intense rigor.
+
+\hr
+
+\visual{Section Starter Question}{../../../../CommonInformation/Lessons/question_mark.png}
+\section*{Section Starter Question}
+
+For a Markov chain with an absorbing state, describe the random variable
+for the time until the chain gets absorbed.
+
+\hr
+
+\visual{Key Concepts}{../../../../CommonInformation/Lessons/keyconcepts.png}
+\section*{Key Concepts}
+
+\begin{enumerate}
+    \item
+        Let \( \{ X_n \} \) be a finite-state absorbing Markov chain
+        with \( a \) absorbing states and \( t \) transient states.  Let
+        the \( (a + t) \times (a + t) \) transition probability matrix
+        be \( P \).  Order the states so the absorbing states come first
+        and non-absorbing, i.e.\ %
+        transient, states come last.  Then the transition probability
+        matrix has the block-matrix form
+        \[
+            P =
+            \begin{pmatrix}
+                I_a & 0 \\
+                A & T
+            \end{pmatrix}
+            .
+        \] Here \( I_{a} \) is an \( a \times a \) identity matrix, \( A
+        \) is the \( t \times a \) matrix of single-step transition
+        probabilities from the \( t \) transient states to the \( a \)
+        absorbing states, \( T \) is a \( t \times t \) submatrix of
+        single-step transition probabilities among the transient states,
+        and \( 0 \) is a \( a \times t \) matrix of \( 0 \)s
+        representing the single-step transition probabilities from
+        absorbing states to transient states.
+    \item
+        The matrix \( N = (I-T)^{-1} \) is the \defn{fundamental matrix}%
+        \index{fundamental matrix}
+        for the absorbing Markov chain.  The entries \( N_{ij} \) of
+        this matrix have a probabilistic interpretation.  The entries \(
+        N_{ij} \) are the expected number of times the chain started
+        from state \( i \) will be in state \( j \) before ultimate
+        absorption.
+    \item
+        First-step analysis gives a compact expression in vector-matrix
+        form for the waiting time \( \mathbf{w} \) to absorption:
+        \[
+            (I - T) \mathbf{w} = \mathbf{1}
+        \] so \( \mathbf{w} = (I-T)^{-1} \mathbf{1} \).
+\end{enumerate}
+
+\hr
+
+\visual{Vocabulary}{../../../../CommonInformation/Lessons/vocabulary.png}
+\section*{Vocabulary}
+\begin{enumerate}
+    \item
+        Let \( \{ X_n \} \) be a finite-state absorbing Markov chain
+        with \( a \) absorbing states and \( t \) transient states.  Let
+        the \( (a + t) \times (a + t) \) transition probability matrix
+        be \( P \).  Order the states so the absorbing states come first
+        and non-absorbing, i.e.\ %
+        transient, states come last.  Then \( \left(P^n \right)_{ij} \to
+        0 \) as \( n \to \infty \) for \( i \) and \( j \) in the
+        transient states, while for \( i \) in the absorbing states, \(
+        P_{ii} = 1 \). Define the \defn{absorption time}~%
+        \index{absorption
+          time}
+        as the random variable
+        \[
+            T = \min \setof{n \ge 0}{X_n \le a}.
+        \]
+    \item
+        The \defn{absorption probability matrix}~%
+        \index{absorption
+            probability matrix}
+        \( B \) is the probability of starting at state \( i \) and
+        ending at absorbing state \( j \).
+    \item
+        For a Markov chain with \( a \) absorbing states and \( t \)
+        transient states, if necessary, reorder the states so the
+        absorbing states come first and non-absorbing, i.e.\ transient,
+        states come last.  Then the transition matrix has the canonical
+        form:
+        \[
+            P =
+            \begin{pmatrix}
+                I_a & 0 \\
+                A & T
+            \end{pmatrix}
+            .
+        \] The matrix \( N = (I-T)^{-1} \) is the \defn{fundamental
+        matrix}%
+        \index{fundamental matrix}
+        for the absorbing Markov chain.
+    \item
+        The \( N \)th \defn{harmonic number} \( H_N \) is%
+        \index{harmonic number}
+        \[
+            H_N = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}
+            {5} + \cdots + \frac{1}{N}.
+        \]
+\end{enumerate}
+
+\hr
+
+\section*{Notation}
+\begin{enumerate}
+    \item
+        \( \{ X_n \} \) -- a finite-state absorbing Markov chain with \(
+        a \) absorbing states and \( t \) transient states.
+    \item
+        \( P \) -- the \( (a + t) \times (a + t) \) transition
+        probability matrix.
+    \item
+        \( I_{a} \) is an \( a \times a \) identity matrix, \( A \) is
+        the \( t \times a \) matrix of single-step transition
+        probabilities from the \( t \) transient states to the \( a \)
+        absorbing states, \( T \) is a \( t \times t \) submatrix of
+        single-step transition probabilities among the transient states,
+        and \( 0 \) is a \( a \times t \) matrix of \( 0 \)s
+        representing the single-step transition probabilities from
+        absorbing states to transient states.
+    \item
+        \( i, j, l \) -- arbitrary states of the Markov chain
+    \item
+        \( Y_{ij} \) -- the number of visits the system makes to
+        transient state \( j \) before reaching an absorbing state,
+        given the system started in transient state \( i \).
+    \item
+        \( w_i \) -- mean time until absorption for transient state \( i
+        \)
+    \item
+        \( \mathbf{w} \) -- vector of waiting times until absorption for
+        transient states
+    \item
+        \( U_{ij}^{(m)} \) -- indicator random variable if the Markov
+        chain is in transient state \( j \) after \( m \) steps given
+        that it starts in transient state \( i \)
+    \item
+        \( \delta_{ij} \) -- Kronecker delta function
+    \item
+        \( N = (I-T)^{-1} \) -- fundamental matrix
+    \item
+        \( \mathbf{1} \) -- vector with all entries \( 1 \)
+    \item
+        \( D_j \) -- Duration of the Left, Right, Center game when \( j \)
+        dollars are in the center.
+\end{enumerate}
+
+\visual{Mathematical Ideas}{../../../../CommonInformation/Lessons/mathematicalideas.png}
+\section*{Mathematical Ideas}
+
+\subsection*{Theory}
+
+Let \( \{ X_n \} \) be a finite-state absorbing Markov chain with \( a \)
+absorbing states and \( t \) transient states, where \( a + t = k \).
+Let the \( (a + t) \times (a + t) \) transition probability matrix be \(
+P \).  Order the states so the absorbing states come first and
+non-absorbing, i.e.\ %
+transient, states come last.  The states \( a+1, 1, 2, \dots, a+t \) are
+transient in that \( \left( P^n \right)_{ij} \to 0 \) as \( n \to \infty
+\) for \( a+1 \le i,j \le a+t \), while states \( 1, \dots, a \) are
+absorbing, \( P_{ii} = 1 \) for \( 1 \le i \le a \).  Then the
+transition probability matrix has the block-matrix form
+\[
+    P =
+    \begin{pmatrix}
+        I_a & 0 \\
+        A & T
+    \end{pmatrix}
+    .
+\] Here \( I_{a} \) is an \( a \times a \) identity matrix, \( A \) is
+the \( t \times a \) matrix of single-step transition probabilities from
+the \( t \) transient states to the \( a \) absorbing states, \( T \) is
+a \( t \times t \) submatrix of single-step transition probabilities
+among the transient states, and \( 0 \) is a \( a \times t \) matrix of \(
+0 \)s representing the single-step transition probabilities from
+absorbing states to transient states.
+
+Starting at one of the transient states \( i \) where \( a+1 \le i \le
+a+t \) such a process will remain in the transient states for some
+duration.  Ultimately, the process gets trapped in one of the absorbing
+states \( i = 1, \dots a \).  Before the Markov chain transitions to one
+of the absorbing states, the number of times it visits a transient state
+is a random variable.  Let \( Y_{ij} \) denote the number of visits the
+system makes to transient state \( j \) before reaching an absorbing
+state, given the system started in transient state \( i \).  Thus, \( Y_
+{ij} \) is a discrete random variable that can take on any nonnegative
+integer value.  The random variables \( Y_{ij} \) are the fundamental
+random variables of interest here.  These fundamental random variables
+are the building blocks for constructing and investigating other random
+variables.  The mean, variance and covariances of the \( Y_{ij} \) are
+the first statistics to investigate.  Of special interest is the mean
+time until absorption.%
+\index{mean time until absorption}
+Define the \defn{absorption time}%
+\index{absorption time}
+\[
+    w_i = \min \setof{n \ge 0}{X_n \le a \given X_0 = i}.
+\] Notice \( w_i = \sum_ {j=a+1}^{a+t} Y_{ij} \), the total number of
+visits the process makes among the transient states.  The expected value
+of this random time \( \E{w_i} \), \( i = a+1, \dots, a+t \) is a first
+measure of the random variable \( w_i \).  Also of interest is the
+probability distribution of the states into which absorption takes
+place.  Using the fundamental random variables, it is possible to
+compute this probability too.
+
+\subsubsection*{Indicator Bernoulli Random Variables}
+
+Let the indicator random variables be
+\[
+    U_{ij}^{(m)} =
+    \begin{cases}
+        1 & \text{ if the Markov chain is in transient state} j \\
+        & \text{ after} m \text{ steps given that it starts in transient
+        state} i \\
+        0 & \text{ if the Markov chain is \emph{not} in transient state}
+        j \\
+        & \text{ after} m \text{ steps given that it starts in transient
+        state} i
+    \end{cases}
+\] for \( m = 0, 1,2, \dots \).  The case \( m = 0 \) simply indicates
+where the system starts:
+\[
+    U_{ij}^{(0)} =
+    \begin{cases}
+        1 & \text{ if the Markov chain starts in transient state} i \\
+        0 & \text{ if the Markov chain does \emph{not} start in transient
+        state} i.
+    \end{cases}
+\] Using the usual notation, \( U_{ij}^{(0)} \) is the Kronecker delta
+function, \( \delta_{ij} \).  The indicator random variables connect to
+the fundamental random variables \( Y_{ij} \) through the sum
+\[
+    Y_{ij} = \sum\limits_{m=0}^{\infty} U_{ij}^{(m)}.
+\]
+
+\subsubsection*{Expected Number of Visits Between States}
+
+The expected number of visits to transient state \( j \) given the
+Markov chain starts in transient state \( i \) in terms of the indicator
+random variable is
+\[
+    \E{Y_{ij}} = \E{\sum\limits_{m=0}^{\infty} U_{ij}^{(m)} } = \sum\limits_
+    {m=0}^{\infty} \E{U_{ij}^{(m)}}.
+\]
+
+Use mathematical induction to show
+\[
+    P^{m} =
+    \begin{pmatrix}
+        I_a & 0 \\
+        A & T
+    \end{pmatrix}
+    ^{m-1}
+    \begin{pmatrix}
+        I_a & 0 \\
+        A & T
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        I_a & 0 \\
+        (I_t + T + T^2 + \cdots + T^{m-1})A & T^m
+    \end{pmatrix}
+    .
+\] (See the exercises.) The elements \( (P^{m})_{ij} \) of \( P^m \) are
+the \( m \)-step transition probabilities between all states.  Since \(
+\E{U_{ij}^{(m)}} = p_{ij}^{%
+(m)} \), so
+\[
+    \E{Y_{ij}} = \sum\limits_{m=0}^{\infty} \E{U_{ij}^{(m)}} = \sum\limits_
+    {m=0}^{\infty} (P^{m})_{ij}.
+\] When \( i \) and \( j \) are transient states, then we only need to
+consider the entries in the transient corner matrix \( T^m \), so
+\[
+    \E{Y_{ij}} = \sum\limits_{m=0}^{\infty} (T^m)_{ij} = \left( \sum\limits_
+    {m=0}^{\infty} T^m \right)_{ij}.
+\] The basic theory of finite absorbing Markov chains ensures that the
+induced \( 2 \)-norm (or operator norm) of \( T \) is less than \( 1 \)
+under typical conditions, that is \( \| T \| < 1 \).  (See the
+exercises.) Therefore \( \sum_{m=0}^{\infty} T^m \) converges.
+Furthermore, it converges to the \defn{fundamental matrix} \( N = (I-T)^
+{-1} \).%
+\index{fundamental matrix}
+Thus \( \E{Y_{ij}} = N_{ij} \).
+
+\subsubsection*{Waiting Time to Absorption}
+
+\begin{theorem}
+    The entries \( N_{ij} \) of the fundamental matrix are the expected
+    number of times the chain started from state \( i \) will be in
+    state \( j \) before ultimate absorption and the vector of expected
+    waiting times to absorption is \( \E{\mathbf{w}} = N = (I-T)^{-1}
+    \mathbf{1} \).
+\end{theorem}
+
+\begin{proof}
+    The sum over all states \( j \) of the number of times that the
+    chain started from state \( i \) will be in state \( j \) before
+    ultimate absorption is the waiting time to absorption.
+\end{proof}
+
+\subsubsection*{Covariances of Numbers of Visits Between States }
+
+Now use the indicator Bernoulli random variables to derive \( \Cov{ Y_{ij}
+}{ Y_{il} } \) where \( i \), \( j \), \( l \) are transient states.
+Recall
+\[
+    \Cov{ Y_{ij} }{ Y_{il} } = \E{Y_{ij} \cdot Y_{il}} - \E{Y_{ij}}
+    \cdot \E{Y_{il}}
+\] and since \( \E{Y_{ij}} \) and \( \E{Y_{il}} \) are known, all that
+is necessary is \( \E{Y_{ij} \cdot Y_{il}} \).  Start with
+\[
+    Y_{ij} Y_{il} = \left( \sum\limits_{\nu=0}^{\infty} U_{ij}^{(\nu)}
+    \right) \left( \sum\limits_{\mu=0}^{\infty} U_{il}^{(\mu)} \right) =
+    \sum\limits_{\nu=0}^{\infty} \sum\limits_{\mu=0}^{\infty} U_{ij}^{(\nu)}
+    U_ {il}^{(\mu)}
+\] so
+\[
+    \E{Y_{ij} Y_{il}} = \E{\sum\limits_{\nu=0}^{\infty} \sum\limits_{\mu=0}^
+    {\infty} U_{ij}^{(\nu)} U_{il}^{(\mu)}} = \sum\limits_{\nu=0}^{\infty}
+    \sum\limits_{\mu=0}^{\infty} \E{U_{ij}^{(\nu)} U_{il}^{(\mu)}}.
+\] Rearrange the double sum into a first term summing over the lattice
+points above the line \( \mu=\nu \), a second term summing over the
+lattice points along the line \( \mu=\nu \), and a third term summing
+over lattice points below the line \( \mu=\nu \),
+\[
+    \sum\limits_{\nu=0}^{\infty} \sum\limits_{\mu=\nu+1}^{\infty} \E{U_{ij}^
+    {(\nu)} U_{il}^{(\mu)}} + \sum\limits_{\nu=0}^{\infty} \E{U_{ij}^{(\nu)}
+    U_{il}^{(\nu)}} + \sum\limits_{\mu=0}^{\infty} \sum\limits_{\nu=\mu+1}^
+    {\infty} \E{U_{il}^ {(\mu)} U_{ij}^{(\nu)}}.
+\] The first and third terms are symmetric, so only evaluate the first
+term.
+
+The expression \( \E{U_{ij}^{(\nu)} U_{il}^{(\mu)}} \) is the
+probability that the system is in transient state \( j \) after exactly \(
+\nu \) steps from the start in state \( i \) \emph{and} the system is in
+transient state \( l \) after exactly \( \mu \) steps from the start in
+state \( i \).  Recall that \( \nu < \mu \).  Using the Markov chain
+property, this is \( \E{U_{ij}^{(\nu)} U_{il}^{(\mu)}} = p_{ij}^{(\nu)}
+p_{jl}^ {(\mu-\nu)} \).  Therefore, the first term is
+\begin{multline*}
+    \sum\limits_{\nu=0}^{\infty} \sum\limits_{\mu=\nu+1}^{\infty} \E{U_{ij}^
+    {(\nu)} U_{il}^{(\mu)}} = \sum\limits_{\nu=0}^{\infty} \sum\limits_{\mu=\nu+1}^
+    {\infty} p_{ij}^{(\nu)} p_{jl}^{(\mu-\nu)} = \sum\limits_{\nu=0}^{\infty}
+    \sum\limits_ {\mu-\nu=1}^{\infty} p_{ij}^{(\nu)} p_{jl}^{(\mu-\nu)}
+    \\
+    = \sum\limits_{\nu=0}^{\infty} \sum\limits_{z=1}^{\infty} p_{ij}^{(\nu)}
+    p_{jl}^{(z)} = \left( \sum\limits_{\nu=0}^{\infty} p_{ij}^ {(\nu)}
+    \right) \left( \sum\limits_{z=1}^{\infty} p_{jl}^{(z)} \right) =
+    \left( \sum\limits_{\nu=0}^{\infty} p_{ij}^{(\nu)} \right) \left(
+    \sum\limits_ {z=0}^{\infty} p_{jl}^{(z)} - p_{jl}^{(0)}\right) \\
+    = \left( \sum\limits_{\nu=0}^{\infty} (T^\nu){}_{ij} \right) \left(
+    \sum\limits_ {z=0}^{\infty} (T^z){}_{jl} - \delta_{jl}\right) =
+    \left( \sum\limits_ {\nu=0}^{\infty} T^\nu \right)_{ij} \left( \sum\limits_
+    {z=0}^{\infty} T^z - \delta_{jl} \right)_{jl}\\
+    = \left( (I_t-T)^{-1} \right)_{ij} \left( (I_t-T)^{-1} - \delta_{jl}
+    \right){}_{jl}\\
+    = N_{ij}(N_{jl}-\delta_{jl}).
+\end{multline*}
+The third term is the first term with \( j \) and \( l \) interchanged,
+so
+\[
+    \sum\limits_{\mu=0}^{\infty} \sum\limits_{\nu=\mu+1}^{\infty} \E{U_{il}^
+    {(\mu)} U_{ij}^{(\nu)}} = N_{il}(N_{lj}-\delta_{lj}).
+\] Finally, the second term is \( \sum\limits_{\nu=0}^{\infty} \E{U_{ij}^
+{%
+(\nu)} U_{il}^{(\nu)}} \) where each summand is the probability the
+Markov chain is in transient state \( j \) after exactly \( \nu \) steps
+after starting in transient state \( i \) and simultaneously in state \(
+l \) after exactly \( \nu \) steps starting from transient state \( i \).
+This is only possible if \( j=l \) hence \( \E{U_{ij}^{(\nu)} U_{il}^{(\nu)}}
+= p_{ij}^{(\nu)} \delta_{jl} \).  Thus for the second term
+\[
+    \sum\limits_{\nu=0}^{\infty} \E{U_{ij}^{(\nu)} U_{il}^{(\nu)}} =
+    \sum\limits_ {\nu=0}^ {\infty} p_{ij}^{(\nu)} \delta_{jl} = \left(
+    \sum\limits_{\nu=0}^ {\infty} (T^ {\nu}){}_{ij} \right) \delta_{jl}
+    = \left( \sum\limits_{\nu=0}^ {\infty} T^{\nu} \right)_{ij} \delta_{jl}
+    = N_{ij} \delta_{jl}.
+\] Putting all terms together
+\[
+    \E{Y_{ij} Y_{il}} = N_{ij}(N_{jl}-\delta_{jl}) + N_{ij} \delta_{jl}
+    + N_{il}(N_{lj}-\delta_{lj}) = N_{ij}N_{jl} + N_{il}N_{lj} - N_{il}\delta_
+    {lj}.
+\] Then
+\begin{equation}
+    \Cov{Y_{ij}}{Y_{il}} = \E{Y_{ij} Y_{il}} - \E{Y_{ij}} \E{Y_{il}} = N_
+    {ij}N_{jl} + N_{il}N_{lj} - N_{ij}N_{il} - N_{il}\delta_{lj}.%
+    \label{eq:newwaitingtime:cov}
+\end{equation}
+The result is symmetric under the interchange of \( j \) and \( l \) as
+it should be.
+
+In particular, letting \( j=l \) is the variance of the number of visits
+to state \( j \) starting from \( i \):
+\[
+    \Var{Y_{ij}} = 2 N_{ij}N_{jj} - N_{ij}^2 - N_{ij}.
+\] Note that this is the variance of the number of visits to transient
+state \( j \) when starting from transient state \( i \), \emph{not} the
+variance of the waiting time to an absorbing state.  Define \(
+\operatorname{diag}
+(N) \) to be the diagonal matrix setting all off-diagonal elements of \(
+N \) to \( 0 \), and define \( N_{\text{sq}} \) to be the matrix
+resulting from squaring each entry, then
+\[
+    \Var{Y_{(i)}} = N(2
+    \operatorname{diag}
+    (N) - I) - N_{\text{sq}}.
+\]
+
+The covariance, for a fixed \( i \), is the \( t \times t \) matrix of
+entries \( \Cov{Y_{ij}}{ Y_{il}} \).  Letting \( N_{(i,\cdot)} \) denote
+the \( 1 \times t \) row-vector from row \( i \) and setting \( (
+\operatorname{diag}
+N_{(i,\cdot)}) \) to be the diagonal matrix with this vector along the
+diagonal this becomes
+\[
+    \left[ \Cov{Y_{ij}}{Y_{il}} \right] = (
+    \operatorname{diag}
+    {N_{(i,\cdot)}}) N + N^T (
+    \operatorname{diag}
+    {N_{(i,\cdot)}}) - N_{(i,\cdot)}^T N_{(i,\cdot)} -
+    \operatorname{diag}
+    N_{(i,\cdot)}.
+\] Note the outer product \( N_{(i,\cdot)}^T N_{(i,\cdot)} \).  Note
+also the notation \( \left[ \Cov{Y_{ij}}{Y_{il}}\right] \) for the
+matrix with \( i,j \) entry \( \Cov{Y_{ij}}{Y_{il}} \).  The variance of
+the waiting time until absorption into any state from state \( i \) is
+then the sum of all \( t^2 \) entries in \( \Var{Y_{(i)}} \).
+
+\subsection*{First-Step Analysis}
+
+First-step analysis%
+\index{first-step analysis}
+says the absorption time from state \( i \) is the first step to another
+transient state plus a weighted average, according to the transition
+probabilities over the transient states, of the absorption times from
+the other transient states.  In symbols, first-step analysis says
+\[
+    w_i = 1 + \sum\limits_{j=a+1}^{a+t} P_{ij} w_j.
+\]
+
+As before, for a Markov chain with \( a \) absorbing states and \( t \)
+transient states, reorder the states so the absorbing states come first
+and non-absorbing, i.e.\ transient, states come last.  Then the
+transition matrix has the canonical form:
+\[
+    P =
+    \begin{pmatrix}
+        I_a & 0 \\
+        A & T
+    \end{pmatrix}
+    .
+\] Here \( I_{a} \) is an \( a \times a \) identity matrix, \( A \) is
+the \( t \times a \) matrix of single-step transition probabilities from
+the \( t \) transient states to the \( a \) absorbing states, \( T \) is
+a \( t \times t \) submatrix of single-step transition probabilities
+among the transient states, and \( 0 \) is a \( a \times t \) matrix of \(
+0 \)s representing the single-step transition probabilities from
+absorbing states to transient states.
+
+Expressing the first-step analysis compactly in vector-matrix form as
+\[
+    \mathbf{w} = \mathbf{1} + T \mathbf{w}
+\] or
+\[
+    (I - T) \mathbf{w} = \mathbf{1}.
+\] Then \( \mathbf{w} = (I-T)^{-1} \mathbf{1} \).  The matrix \( N = (I-T)^
+{-1} \) is the \defn{fundamental matrix}%
+\index{fundamental matrix}
+for the absorbing Markov chain.  The entries \( N_{ij} \) of this matrix
+have a probabilistic interpretation.  The entries \( N_{ij} \) are the
+expected number of times the chain started from state \( i \) will be in
+state \( j \) before ultimate absorption.
+
+The next theorem shows the \( t \times a \) matrix of \defn{absorption
+probabilities}%
+\index{absorption probability matrix}
+\( B = NA = (I-T)^{-1}A \) has as entries the probability of starting at
+state \( i \) and ending up at a given absorbing state \( j \).
+
+\begin{theorem}
+    Let \( b_{ij} \) be the probability of the Markov chain starting in
+    transient state \( i \) and ending in absorbing state \( j \), then
+    \[
+        B = ( b_{ij} ) = NA.
+    \]
+\end{theorem}
+
+\begin{proof}
+    The proof is by first-step analysis.  Starting in state \( i \), the
+    process may be captured in \( j \) in one or more steps.  The
+    probability of capture in a single step is \( p_{ij} \).  If this
+    does not happen, the process may move to another absorbing state, in
+    which case it is impossible to reach \( j \), or to a transient
+    state \( k \).  In the latter case, the probability of being
+    captured in \( j \) is \( b_{kj} \).  Hence
+    \[
+        b_{ij} = p_{ij} + \sum\limits_{l = a+1}^{a+t} p_{il} b_{lj}
+    \] or in matrix form \( B = A + TB \).  Thus, \( B = (I-T)^{-1} A =
+    NA \).
+\end{proof}
+
+Kemeny and Snell~%
+\cite[page 51]{kemeny60} derive the variance of the waiting time using
+first-step analysis.
+
+\begin{theorem}
+    \label{thm:waitingtimeabsorption:varwaittime}
+    \[
+        \Var{\mathbf{w}} = (2N - I)N\mathbf{1} - (N\mathbf{1})_{\text{sq}}
+    \] where \( (N\mathbf{1})_{\text{sq}} \) is the element-wise squared
+    vector.
+\end{theorem}
+
+\begin{proof}
+    \begin{enumerate}
+        \item
+            Start with \( \E{\mathbf{w}} = N \mathbf{1} \).  Let \(
+            \mathbf{w}_{sq} \) be the element-wise squared vector.  Then
+            use first-step analysis to evaluate \( \E{\mathbf{w}_{sq}} \).
+        \item
+            From starting state \( i \) the chain can go to any state \(
+            l \) with probability \( p_{il} \).  If the new state is
+            absorbing, then it can never reach another state, and the
+            contribution is \( 1 \) step.  If the new state is transient
+            count the weighted average of the squares of the waiting
+            times plus \( 1 \).
+        \item
+            In symbols:
+            \begin{align*}
+                \E{\mathbf{w}_{sq}} &= \sum\limits_{l=1}^{a} p_{il}
+                \mathbf{1} + \sum\limits_{l=a+1}^{a+t} p_{il} (\E{(\mathbf
+                {w}+\mathbf{1})_{\text{sq}} })_l \\
+                &= \sum\limits_{l=1}^{a} p_{il} \mathbf{1} + \sum\limits_
+                {l=a+1}^{a+t} p_{il} \left( (\E{\mathbf{w}}_{\text{sq}})_l
+                + 2 (\E{\mathbf{w}})_l + \mathbf{1} \right) \\
+                &= T \E{\mathbf{w}_{\text{sq}}} + 2 T\E{\mathbf{w}} +
+                \mathbf{1}.
+            \end{align*}
+        \item
+            Rearrange using \( N = (I_t - T)^{-1} \) and \( NT = (I_t -
+            T)^{-1} T = N - I_t \) (See the exercises.)
+            \begin{align*}
+                \E{\mathbf{w}_{sq}} &= (I_t - T)^{-1} (2 T\E{\mathbf{w}}
+                + \mathbf{1}) \\
+                &= 2NT \E{\mathbf{w}} + N \mathbf{1} \\
+                &= 2(N-I_t) \E{\mathbf{w}} + \E{\mathbf{w}} \\
+                &= (2N-I_t) \E{\mathbf{w}}.
+            \end{align*}
+        \item
+            Thus
+            \[
+                \Var{\mathbf{w}} = (2N - I)N\mathbf{1} - (N\mathbf{1})_{\text
+                {sq}}.
+            \]
+    \end{enumerate}
+\end{proof}
+
+\begin{remark}
+    Carchidi and Higgins
+    \cite{carchidi17} give an alternate proof and slightly different
+    derivation of this formula for the variance of the waiting time
+    until absorption using equation~\eqref{eq:newwaitingtime:cov}.
+\end{remark}
+\subsection*{Examples}
+
+\begin{example}
+    Consider a random walk%
+    \index{random walk}
+    of a particle that moves along a straight line in unit steps.  Each
+    step is \( 1 \) unit to the right with probability \( p \) and to
+    the left with probability \( q = 1-p \).  It moves until it reaches
+    one of two extreme points which are absorbing boundaries.~%
+    \index{absorption probability matrix}
+    Assume that if the process reaches the boundary points, it remains
+    there from that time on.  Figure~%
+    \ref{fig:waitingtimeabsorption:randomwalkphasespace} has \( 9 \)
+    states numbered from \( -4 \) to \( 4 \).  The absorbing boundary
+    states are \( -4 \) and \( 4 \).
+
+    \begin{figure}
+        \centering
+\begin{asy}
+            import graph;
+
+            size(5inches);
+
+            real myfontsize = 10; real mylineskip = 1.2*myfontsize; pen
+            mypen = fontsize(myfontsize, mylineskip); defaultpen(mypen);
+
+            xaxis(xmin=-5, xmax=5, ticks=RightTicks(beginlabel=false,
+            endlabel=false, N=10, Step=0)); draw( (-3,0)--(3,0),
+            linewidth(2pt)); dot( (3,0) );
+
+            draw( (0,1/10)--(1,1/10), arrow=Arrow(TeXHead));
+
+            draw( (1,2/10)--(0,2/10), arrow=Arrow(TeXHead)); draw((0,2/10)--
+            (-1,2/10),arrow=Arrow(TeXHead)); draw((-1,2/10)--(-2,2/10),arrow=Arrow
+            (TeXHead)); draw((-2,2/10)--(-3,2/10),arrow=Arrow(TeXHead));
+
+            draw( (-3,3/10)--(-2,3/10), arrow=Arrow(TeXHead));
+
+            draw((-2,4/10)--(-3,4/10),arrow=Arrow(TeXHead));
+
+            draw((-3,5/10)--(-2,5/10),arrow=Arrow(TeXHead));
+
+            draw((-2,6/10)--(-3,6/10),arrow=Arrow(TeXHead));
+
+            draw((-3,7/10)--(-2,7/10),arrow=Arrow(TeXHead)); draw((-2,7/10)--
+            (-1,7/10),arrow=Arrow(TeXHead)); draw((-1,7/10)--(0,7/10),arrow=Arrow
+            (TeXHead));
+
+            draw((0,8/10)--(-1,8/10),arrow=Arrow(TeXHead));
+
+            draw((-1,9/10)--(0,9/10),arrow=Arrow(TeXHead)); draw((0,9/10)--
+            (1,9/10),arrow=Arrow(TeXHead)); draw((1,9/10)--(2,9/10),arrow=Arrow
+            (TeXHead)); draw((2,9/10)--(3,9/10),arrow=Arrow(TeXHead));
+\end{asy}
+        %% \includegraphics{randomwalkphasespace.png}
+        \caption{Image of a possible random walk in phase line after an
+        odd number of steps.}%
+        \label{fig:waitingtimeabsorption:randomwalkphasespace}
+    \end{figure}
+
+    The full transition probability matrix is
+    \[
+        P = \bordermatrix{ & -4 & -3 & -2 & -1 & 0 & 1 & 2 & 3 & 4 \cr
+        -4 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \cr
+        -3 & q & 0 & p & 0 & 0 & 0 & 0 & 0 & 0 \cr
+        -2 & 0 & q & 0 & p & 0 & 0 & 0 & 0 & 0 \cr
+        -1 & 0 & 0 & q & 0 & p & 0 & 0 & 0 & 0 \cr
+        0 & 0 & 0 & 0 & q & 0 & p & 0 & 0 & 0 \cr
+        1 & 0 & 0 & 0 & 0 & q & 0 & p & 0 & 0 \cr
+        2 & 0 & 0 & 0 & 0 & 0 & q & 0 & p & 0 \cr
+        3 & 0 & 0 & 0 & 0 & 0 & 0 & q & 0 & p \cr
+        4 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \cr
+        }.
+    \]
+
+    Reorder the states as \( -4, 4, -3, -2, -1, 0, 1, 2, 3 \) to bring
+    the transition probability matrix to the standard form
+    \[
+        P_{1} =
+        \begin{pmatrix}
+            1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            q & 0 & 0 & p & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & q & 0 & p & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & q & 0 & p & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & q & 0 & p & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & q & 0 & p & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & q & 0 & p \\
+            0 & p & 0 & 0 & 0 & 0 & 0 & q & 0 \\
+        \end{pmatrix}
+    \] so
+    \[
+        T =
+        \begin{pmatrix}
+            0 & p & 0 & 0 & 0 & 0 & 0 \\
+            q & 0 & p & 0 & 0 & 0 & 0 \\
+            0 & q & 0 & p & 0 & 0 & 0 \\
+            0 & 0 & q & 0 & p & 0 & 0 \\
+            0 & 0 & 0 & q & 0 & p & 0 \\
+            0 & 0 & 0 & 0 & q & 0 & p \\
+            0 & 0 & 0 & 0 & 0 & q & 0 \\
+        \end{pmatrix}
+        .
+    \] A computer algebra system can compute the fundamental matrix \( N
+    (p) = (I-T)^{-1} \) but the general form in \( p \) and \( q \) is
+    long and unhelpful.  Two representative numerical examples suffice
+    to show the possibilities.
+
+    \[
+        N(1/2) =
+        \begin{pmatrix}
+            7/4 & 3/2 & 5/4 & 1 & 3/4 & 1/2 & 1/4\\
+            3/2 & 3 & 5/2 & 2 & 3/2 & 1 & 1/2\\
+            5/4 & 5/2 & 15/4 & 3 & 9/4 & 3/2 & 3/4\\
+            1 & 2 & 3 & 4 & 3 & 2 & 1\\
+            3/4 & 3/2 & 9/4 & 3 & 15/4 & 5/2 & 5/4\\
+            1/2 & 1 & 3/2 & 2 & 5/2 & 3 & 3/2 \\
+            1/4 & 1/2 & 3/4 & 1 & 5/4 & 3/2 & 7/4
+        \end{pmatrix}
+        .
+    \] Then the waiting times to absorption are \( 7, 12, 15, 16, 15,
+    12, 7 \).  For the variances, consider only the central state,
+    originally labeled as \( 0 \), after reordering it is the sixth
+    state in the middle of the transient states.
+    \[
+        \left[ \Cov{Y_{0j}}{ Y_{0k}} \right] =
+        \begin{pmatrix}
+            3/2 & 5/2 & 2 & 1 & 0 & -1/2 & -1/2 \\
+            5/2 & 6 & 13/2 & 4 & 3/2 & 0 & -1/2\\
+            2 & 13/2 & 21/2 & 9 & 9/2 & 3/2 & 0\\
+            1 & 4 & 9 & 12 & 9 & 4 & 1\\
+            0 & 3/2 & 9/2 & 9 & 21/2 & 13/2 & 2\\
+            -1/2 & 0 & 3/2 & 4 & 13/2 & 6 & 5/2\\
+            -1/2 & -1/2 & 0 & 1 & 2 & 5/2 & 3/2
+        \end{pmatrix}
+        .
+    \] The variance of the number of visits to \( 0 \) until absorption
+    is \( \mathbf{1}^{T} V \mathbf{1} = 160 \), the standard deviation
+    is \( 4 \sqrt{10} \).  The negative covariance \( -1/2 \) of the
+    number of visits from \( 0 \) to \( -3 \) until absorption with the
+    number of visits from \( 0 \) to \( 3 \) until absorption indicates
+    the random number of visits from \( 0 \) to \( -3 \) until
+    absorption has a somewhat opposite distribution to that of the
+    random number of visits from \( 0 \) to \( 3 \) until absorption.
+    That is, when the number of visits from \( 0 \) to \( -3 \) until
+    absorption is large, the number of visits from \( 0 \) to \( 3 \)
+    until absorption will be small.  This makes sense, since if the
+    number of visits from \( 0 \) to \( -3 \) is large, the likelihood
+    of absorption into \( -4 \) increases, and the number of visits from
+    \( 0 \) to \( 3 \) decreases.
+
+    The probabilities of absorption are
+    \[
+        N(1/2) A =
+        \begin{pmatrix}
+            7/8 & 1/8\\
+            3/4 & 1/4\\
+            5/8 & 3/8\\
+            1/2 & 1/2\\
+            3/8 & 5/8\\
+            1/4 & 3/4\\
+            1/8 & 7/8
+        \end{pmatrix}
+    \] and are symmetric as expected.
+
+    If \( p = 2/3 \) so the probability of moving to the right is twice
+    the probability of moving to the left, then
+    \[
+        N(2/3) =
+        \begin{pmatrix}
+            127/85 & 126/85 & 124/85 & 24/17 & 112/85 & 96/85 & 64/85\\
+            63/85 & 189/85 & 186/85 & 36/17 & 168/85 & 144/85 & 96/85\\
+            31/85 & 93/85 & 217/85 & 42/17 & 196/85 & 168/85 & 112/85\\
+            3/17 & 9/17 & 21/17 & 45/17 & 42/17 & 36/17 & 24/17\\
+            7/85 & 21/85 & 49/85 & 21/17 & 217/85 & 186/85 & 124/85\\
+            3/85 & 9/85 & 21/85 & 9/17 & 93/85 & 189/85 & 126/85\\
+            1/85 & 3/85 & 7/85 & 3/17 & 31/85 & 63/85 & 127/85
+        \end{pmatrix}
+    \] and the waiting times to absorption are approximately \( 9.05 \),
+    \( 12.07 \), \( 12.08 \), \( 10.59 \), \( 8.34 \), \( 5.72 \), \(
+    2.91 \).  For the variances, consider only the central state,
+    originally labeled as \( 0 \) and after reordering is the sixth
+    state in the middle of the transient states.
+    \[
+        \left[ \Cov{Y_{0j}}{Y_{0k}} \right] =
+        \begin{pmatrix}
+            \frac{462}{1445} & \frac{162}{289} & \frac{708}{1445} &
+            \frac{72}{289} & 0 & -\frac{144}{1445} & -\frac{144}{1445}\\
+            \frac{162}{289} & \frac{2232}{1445} & \frac{2682}{1445} &
+            \frac{324}{289} & \frac{504}{1445} & 0 & -\frac{144}{1445}\\
+            \frac{708}{1445} & \frac{2682}{1445} & \frac{5124}{1445} &
+            \frac{882}{289} & \frac{1764}{1445} & \frac{504}{1445} & 0\\
+            \frac{72}{289} & \frac{324}{289} & \frac{882}{289} & \frac{1260}
+            {289} & \frac{882}{289} & \frac{324}{289} & \frac{72}{289}\\
+            0 & \frac{504}{1445} & \frac{1764}{1445} & \frac{882}{289} &
+            \frac{5838}{1445} & \frac{720}{289} & \frac{912}{1445}\\
+            -\frac{144}{1445} & 0 & \frac{504}{1445} & \frac{324}{289} &
+            \frac{720}{289} & \frac{4068}{1445} & \frac{1728}{1445}\\
+            -\frac{144}{1445} & -\frac{144}{1445} & 0 & \frac{72}{289} &
+            \frac{912}{1445} & \frac{1728}{1445} & \frac{1176}{1445}
+        \end{pmatrix}
+        .
+    \] The variance is \( \mathbf{1}^{T} V \mathbf{1} = 15264/289
+    \approx 52.81661 \), the standard deviation is \( 7.26750 \), less
+    than the symmetric case where \( p =1/2 = q \), as expected.
+
+    The probabilities of absorption are
+    \[
+        N(2/3) A =
+        \begin{pmatrix}
+            \frac{127}{255} & \frac{128}{255} \\
+            \frac{21}{85} & \frac{64}{85} \\
+            \frac{31}{255} & \frac{224}{255} \\
+            \frac{1}{17} & \frac{16}{17} \\
+            \frac{7}{255} & \frac{248}{255} \\
+            \frac{1}{85} & \frac{84}{85} \\
+            \frac{1}{255} & \frac{254}{255}
+        \end{pmatrix}
+        .
+    \] The absorption probabilities are strongly biased to the right, as
+    expected.
+\end{example}
+
+\begin{example}
+
+    It's your \( 30 \)th birthday, and your friends bought you a cake
+    with \( 30 \) candles on it.  You make a wish and try to blow them
+    out.  Every time you blow, you blow out a random number of candles
+    between one and the number that remain, including one and that other
+    number.  How many times on average do you blow before you extinguish
+    all the candles?
+
+    Let the states be the number of candles remaining lit.  Order the \(
+    N= 31 \) states as \( 0, 1, 2, 3, \dots, 29, 30 \).  Then the state \(
+    0 \) is absorbing and all other states are transient.  Interpret
+    ``blow out a random number of candles between one and the number
+    that remain'' as uniform distribution on the number of candles
+    remaining.  Instead of solving this full problem at once, try a
+    smaller problem first, with the number of candles \( N = 5 \).  Then
+    the transition probability matrix in canonical form is
+    \[
+        P =
+        \begin{pmatrix}
+            1 & 0 & 0 & 0 & 0 & 0 \\
+            1 & 0 & 0 & 0 & 0 & 0 \\
+            1/2 & 1/2 & 0 & 0 & 0 & 0 \\
+            1/3 & 1/3 & 1/3 & 0 & 0 & 0 \\
+            1/4 & 1/4 & 1/4 & 1/4 & 0 & 0 \\
+            1/5 & 1/5 & 1/5 & 1/5 & 1/5 & 0 \\
+        \end{pmatrix}
+        .
+    \] Then the first-step equations for the waiting time, that is the
+    number of attempts needed to blow out the candles are
+    \begin{align*}
+        w_1 &= 1 \\
+        w_2 &= 1 + \frac{1}{2} w_1 \\
+        w_3 &= 1 + \frac{1}{3} w_1 + \frac{1}{3} w_2 \\
+        w_4 &= 1 + \frac{1}{4} w_1 + \frac{1}{4} w_2 + \frac{1}{4} w_3
+        \\
+        w_5 &= 1 + \frac{1}{5} w_1 + \frac{1}{5} w_2 + \frac{1}{5} w_3 +
+        \frac{1}{5} w_4\\
+    \end{align*}
+    Solving this recursively, \( w_1 = 1 \), \( w_2 = 1 + \frac{1}{2} \),
+    \( w_{3} = 1 + \frac{1}{3} + \frac{1}{3} \cdot (1+ \frac{1}{2}) \),
+    so \( w_3 = 1 + \frac{1}{2} + \frac{1}{3} \).  Continuing to solve
+    recursively
+    \begin{align*}
+        w_4 &= 1 + 1/2 + 1/3 + 1/4 \\
+        w_5 &= 1 + 1/2 + 1/3 + 1/4 + 1/5.
+    \end{align*}
+    The inductive pattern is clear.  The waiting time with \( N \)
+    candles is the \( N \)th \defn{harmonic number} \( H_N \)%
+    \index{harmonic number}
+    \[
+        w_N = H_N = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}
+        {5} + \cdots + \frac{1}{N}.
+    \]
+
+    For the original problem with \( 30 \) candles the transient states
+    are \( 1, 2, 3, \dots, 30 \) and the absorbing state is \( 0 \).
+    Then the canonical form transition probability matrix is
+    \[
+        P =
+        \begin{pmatrix}
+            1 & 0 & 0 & \ldots & 0 & 0 \\
+            1 & 0 & 0 & \ldots & 0 & 0 \\
+            1/2 & 1/2 & 0 & \ldots & 0 & 0 \\
+            1/3 & 1/3 & 1/3 & \ldots & 0 & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+            1/30 & 1/30 & 1/30 & \ldots & 1/30 & 0 \\
+        \end{pmatrix}
+        .
+    \]
+
+    The quantity of interest is the expected waiting time until
+    absorption into the state \( 0 \).  Expressing the first-step
+    analysis compactly in vector-matrix form as
+    \[
+        (I - T) \mathbf{w} = \mathbf{1},
+    \] substituting in the values from the transition matrix and solving
+    with a computer, this is \( w_{30} = H_{30} \approx 3.9950 \).  By
+    calculating the covariance matrix and taking the sum of all entries,
+    the variance of the waiting time from the transient state of all
+    candles lit is approximately \( 2.3828 \).
+\end{example}
+
+\begin{example}
+    An urn contains two unpainted balls.  At a sequence of times, choose
+    a ball at random, then paint it either red or black, and put it
+    back.  For an unpainted ball, choose a color at random.  For a
+    painted ball, change its color.  Form a Markov chain by taking as a
+    state the triple \( (x,y,z) \) where \( x \) is the number of
+    unpainted balls, \( y \) the number of red balls, and \( z \) the
+    number of black balls.  The transition matrix is then
+    \[
+        \bordermatrix{ & (0,1,1) & (0,2,0) & (0,0,2) & (2,0,0) & (1,1,0)
+        & (1,0,1) \cr
+        (0,1,1) & 0 & 1/2 & 1/2 & 0 & 0 & 0 \cr
+        (0,2,0) & 1 & 0 & 0 & 0 & 0 & 0 \cr
+        (0,0,2) & 1 & 0 & 0 & 0 & 0 & 0 \cr
+        (2,0,0) & 0 & 0 & 0 & 0 & 1/2 & 1/2 \cr
+        (1,1,0) & 1/4 & 1/4 & 0 & 0 & 0 & 1/2 \cr
+        (1,0,1) & 1/4 & 0 & 1/4 & 0 & 1/2 & 0 \cr
+        }.
+    \] In this case, the system has no absorbing state, that is, a state
+    that once entered remains the same thereafter.  However, the first
+    three states together are an irreducible set, once the process
+    enters that set, it continues in that set.  So lump those states
+    together as a single absorbing state, and the transient states are \(
+    (2,0,0) \), \( (1,1,0) \), and \( (1,0,1) \).  Then
+    \[
+        T =
+        \begin{pmatrix}
+            & 0 & 1/2 & 1/2 \\
+            & 0 & 0 & 1/2 \\
+            & 0 & 1/2 & 0 \\
+        \end{pmatrix}
+    \] and the fundamental matrix is
+    \[
+        N =
+        \begin{pmatrix}
+            1 & 1 & 1\\
+            0 & 4/3 & 2/3\\
+            0 & 2/3 & 4/3
+        \end{pmatrix}
+        .
+    \] With this, we can compute
+    \[
+        \E{\mathbf{w}} = N \mathbf{1} = (3, 2, 2)^T
+    \] and
+    \[
+        \Var{\mathbf{w}} = (2N-I)\E{\mathbf{w}}-(\E{\mathbf{w}})_{\text{sq}}
+        = (2,2,2)^T.
+    \] Finally,
+    \[
+        \Var{\mathbf{X}} = N(2
+        \operatorname{diag}
+        (N) - I) - N_{\text{sq}} =
+        \begin{pmatrix}
+            0 & 2/3 & 2/3 \\
+            0 & 4/9 & 2/3 \\
+            0 & 2/3 & 4/9
+        \end{pmatrix}
+        .
+    \] Since the process must immediately leave state \( (2,0,0) \) and
+    cannot go back, the variance is \( 0 \) for the number of times in
+    this state.
+\end{example}
+
+\begin{example}
+    The following is a larger example of the painting the balls puzzle.
+
+    You play a game with four balls in a box:  One ball is red, one is
+    blue, one is green and one is yellow.  You draw a ball out of the
+    box at random and note its color.  Without replacing the first ball,
+    you draw a second ball and then paint it to match the color of the
+    first.  Replace both balls, and repeat the process.  The game ends
+    when all four balls have become the same color.  What is the
+    expected number of turns to finish the game?
+
+    Take the states as the number of balls of each different color
+    without regard for the colors themselves.  For example, partition 4
+    balls in 5 different ways:
+    \[
+        1+1+1+1, \quad 2+1+1, \quad 2+2, \quad 3+1, \quad 4.
+    \] The partition \( 2+1+1 \), for example, consists of cases where
+    two of the balls are the same color and the other two balls are two
+    other colors.  For example, the cases ``red \& red \& green \&
+    blue'' and ``blue \& blue \& yellow \& red' correspond to the
+    partition \( 2+1+1 \).  By using these five partitions as states in
+    a Markov Chain, we can compute the transition probabilities to go
+    from one state to the next.  For example, the probability of
+    transition from \( 2+1+1 \) to \( 3+1 \) is \( 1/3 \) because in
+    order for this transition to occur, we must first choose one of the
+    two identically colored balls with probability \( 2/4 \), then we
+    must choose one of the other two balls out of the remaining three
+    with probability \( 2/3 \).  The joint probability is \( 2/4 \cdot
+    2/3 = 1/3 \).  As another example, the probability of transition
+    from \( 2 + 2 \) to \( 3 + 1 \) is the probability of first picking
+    a ball of either color, leaving \( 1 \) ball of that color and \( 2 \)
+    balls of the other color, then from those \( 3 \) balls picking the
+    second color with probability \( 2/3 \).  Calculate all remaining
+    transition probabilities in the same way.
+
+    \[
+        P = \bordermatrix{ & 1+1+1+1 & 2+1+1 & 3 + 1 & 2 + 2 & 4 \cr
+        1+1+1+1 & 0 & 1 & 0 & 0 & 0 \cr
+        2+1+1 & 0 & 1/2 & 1/3 & 1/6 & 0 \cr
+        3+1 & 0 & 0 & 1/2 & 1/4 & 1/4 \cr
+        2+2 & 0 & 0 & 2/3 & 1/3 & 0 \cr
+        4 & 0 & 0 & 0 & 0 & 1 \cr
+        }.
+    \]
+
+    The absorbing state is \( 4 \).  Rearranging into the canonical
+    block-matrix form
+    \[
+        P = \bordermatrix{ & 4 & 1+1+1+1 & 2+1+1 & 3 + 1 & 2 + 2 \cr
+        4 & 1 & 0 & 0 & 0 & 0 \cr
+        1+1+1+1 & 0 & 0 & 1 & 0 & 0 \cr
+        2+1+1 & 0 & 0 & 1/2 & 1/3 & 1/6 \cr
+        3+1 & 1/4 & 0 & 0 & 1/2 & 1/4 \cr
+        2+2 & 0 & 0 & 0 & 2/3 & 1/3 \cr
+        }.
+    \]
+
+    Then \( N = (I-T)^{-1} \) is
+    \[
+        \begin{pmatrix}
+            1 & 2 & 4 & 2\\
+            0 & 2 & 4 & 2\\
+            0 & 0 & 4 & 3/2\\
+            0 & 0 & 4 & 3
+        \end{pmatrix}
+    \] and the waiting time from the initial state is \( 1 + 2 + 4 + 2 =
+    9 \).  From the state \( 1+1+1+1 \) (labeled as state \( 2 \) in the
+    canonical format), the covariance matrix is
+    \[
+        \begin{pmatrix}
+            0 & 0 & 0 & 0\\
+            0 & 2 & 0 & 0\\
+            0 & 0 & 12 & 6\\
+            0 & 0 & 6 & 6
+        \end{pmatrix}
+        .
+    \] Then the variance of the number of visits is \( 32 \) and the
+    standard deviation of the number of visits is \( 4 \sqrt{2} \approx
+    5.66 \).
+
+\end{example}
+
+\begin{example}
+    The following example is from the December 22, 2017 Riddler at \link
+    {https://fivethirtyeight.com/features/hark-two-holiday-puzzles/}{Fivethirtyeight.com}.
+    It concerns a game of chance called Left, Right, Center.  In this
+    game, players sit in a circle and starts with some number of \( \$1 \)
+    bills.  Players take turns, in order around the circle, rolling
+    three dice.  For each die, if it comes up \( 1 \) or \( 2 \), the
+    player gives a dollar to the person to the left.  If it comes up \(
+    3 \) or \( 4 \), the player gives a dollar to the person on the
+    right.  And if it comes up \( 5 \) or \( 6 \), the player puts a
+    dollar in the center.  Assume the following:  First, if a player has
+    no dollars, then her turn is skipped.  Second, if a player has one
+    or two dollars, then the player rolls only one or two dice,
+    respectively.  The game ends as soon as only a single person has any
+    money left.  How long is the game expected to last for six players
+    each starting with three \( \$1 \) bills?  For \( X \) players each
+    starting with \( Y \) \( \$1 \) bills?
+
+    Consider the allocation of the total of \( \$18 \) among the \( 6 \)
+    players and the center, that is \( 7 \) places, as the states of a
+    Markov chain.  Using the ``stars and bars'' argument, choosing \(
+    7-1 = 6 \) bars from \( 18 + 6 \) objects the number of states is \(
+    \binom{18+6}{6} = 134{,}596 \).  This also counts all the money in
+    the center as one state which would not strictly be a state of the
+    game.  This makes \( 134{,}595 \) actual game states.  This is the
+    same as the number of states dividing any number of dollars from \(
+    1 \) to \( 18 \) among \( 6 \) players, ignoring the money in the
+    center which would be \( \sum_{j=6}^{23}\binom{j}{5} = 134{,}595 \).
+    This is essentially the conclusion of the hockey-stick identity for
+    binomial coefficients.
+
+    The game ends when exactly \( 1 \) of the \( 6 \) players has any
+    amount of money from \( \$1 \) to \( \$18 \).  That is, there are \(
+    6 \cdot (1 + \cdots + 18) = 6 \cdot 18 \cdot 19/2 = 1026 \) terminal
+    states that can be considered as the absorbing states of the game.
+
+    The shortest possible game would be for the first \( 5 \) players to
+    throw all \( 5 \)'s and \( 6 \)'s, leaving the sixth player with the
+    original stake of money. This shortest game would be \( 5 \) turns
+    with probability \( (1/27)^5 \).
+
+    Next consider the total number of dollars in the circle at each
+    turn.  The expected loss of dollars from the circle to the center at
+    each turn is
+    \[
+        0 \cdot \left( \frac{2}{3} \right)^3 + 1 \cdot \left( 3 \cdot
+        \left( \frac{2}{3} \right)^2 \cdot \left( \frac{1}{3} \right)
+        \right) + 2 \cdot \left( 3 \cdot \left( \frac{2}{3} \right)
+        \cdot \left( \frac{1}{3} \right)^2 \right) + 3 \cdot \left(
+        \frac {1}{3} \right)^3 = 1.
+    \] That means it takes should take about \( 17 \) turns to end the
+    game.  More precisely, consider the lumped system where each state
+    is the number of dollars in the circle, from \( \$18 \) to \( \$1 \).
+    Let \( D_j \) be the duration of the game from \( j \) dollars with \(
+    j = 1, \dots, 18 \).  Then a first-step analysis gives the system of
+    equations \( D_j = (8/27)D_j + (12/27)D_{j-1} + (6/27)D_{j-2} + (1/27)D_
+    {j-3} + 1 \), with \( D_j = 0 \) for \( j = 1, 0, -1 \).  The
+    solution of this system with Octave gives \( D_{18} = 17.3333 \) (see
+    the scripts for the solution method) which is consistent with the
+    previous crude estimate.
+
+    The number of states and absorbing states are too large to be
+    effectively handled by matrix methods.  Although the conceptual
+    set-up of the game is clearly the waiting time until absorption in a
+    Markov chain, simulation seems to be the best way to answer the
+    question.  Results of simulating games with \( 6 \) to \( 9 \)
+    players each starting with \( 3 \) to \( 6 \) dollars are in Table~%
+    \ref{tab:waitingtimeabsorption:lcrmean} and Table~%
+    \ref{tab:waitingtimeabsorption:lcrmean}. The Riddler says the game
+    with \( X \) players each starting with \( Y \) dollars will last \(
+    2(X-2)Y \) turns but does not give a proof.  The simulations give
+    means that are roughly consistent with this value.
+    \begin{table}
+        \centering
+        \begin{tabular}{l | llll}
+                   & 6       & 7       & 8       & 9       \\ 
+            \hline
+            3      & 25.7096 & 32.3160 & 38.9660 & 45.3878 \\ 
+            4      & 31.7890 & 39.7598 & 47.3006 & 55.3804 \\ 
+            5      & 38.3244 & 47.4416 & 56.3536 & 65.4438 \\ 
+            6      & 44.8394 & 54.9732 & 65.5688 & 75.3548
+        \end{tabular}
+        \caption{Mean number of turns in \( 5000 \) simulations of the
+        game with \( X \) players (columns) each with \( Y \) dollars (rows).}
+        \label{tab:waitingtimeabsorption:lcrmean}
+    \end{table}
+
+    \begin{table}
+        \centering
+        \begin{tabular}{l | llll}
+                   & 6         & 7         & 8         & 9         \\ 
+            \hline
+            3      & 6.546804  & 7.009249  & 7.564145  & 7.898221  \\ 
+            4      & 7.751729  & 8.176348  & 8.594918  & 9.099816  \\ 
+            5      & 8.989401  & 9.367077  & 9.878952  & 10.387840 \\ 
+            6      & 10.161804 & 10.468601 & 11.080443 & 11.654668
+        \end{tabular}
+        \caption{Variance of number of turns in \( 5000 \) simulations
+        of the game with \( X \) players each with \( Y \) dollars.}%
+        \label{tab:waitingtimeabsorption:lcrmean}
+    \end{table}
+
+\end{example}
+
+\visual{Section Starter Question}{../../../../CommonInformation/Lessons/question_mark.png}
+\section*{Section Ending Answer}
+
+The number of times the Markov chain visits a transient state is a
+random variable.  Let \( Y_{ij} \) denote the number of visits the
+system makes to transient state \( j \) before reaching an absorbing
+state, given the system started in transient state \( i \).  Thus, \( Y_
+{ij} \) is a discrete random variable that can take on any nonnegative
+integer value.
+
+\subsection*{Sources} The subsection on covariances is adapted from
+Carchidi and Higgins
+\cite{carchidi17}.  The section on first-step analysis is adapted from
+\booktitle{Finite Markov Chains} by Kemeny and Snell
+\cite{kemeny60}.  Other ideas are from \booktitle{An Introduction to
+Stochastic Modeling} by Taylor and Karlin and \booktitle {Random Walks
+and Electrical Networks} by Doyle and Snell
+\cite{doyle84}.  The birthday candle example is adapted from the January
+13, 2017 ``Riddler'' at \link{https://fivethirtyeight.com/features/can-you-time-the-stoplight-just-right/}
+{Fivethirtyeight.com}/ The two colored balls example is adapted from
+\booktitle{Finite Markov Chains} by Kemeny and Snell
+\cite{kemeny60}. The four colored balls example is adapted from
+http://www.laurentlessard.com/bookproofs/colorful-balls-puzzle/ The
+Left-Center-Right game example is from the December 22, 2017 Riddler at
+\link{https://fivethirtyeight.com/features/hark-two-holiday-puzzles/}{Fivethirtyeight.com}.
+
+\hr
+
+\visual{Algorithms, Scripts, Simulations}{../../../../CommonInformation/Lessons/computer.png}
+\section*{Algorithms, Scripts, Simulations}
+
+\subsection*{Algorithm}
+
+\subsection*{Algorithm}
+
+\begin{algorithm}[H]
+  \DontPrintSemicolon
+  \SetKwFunction{FplayerIndex}{playerIndex}
+  \SetKwFunction{Fgame}{game}
+  \SetKwFunction{Fturn}{turn}
+
+
+  \SetKwProg{Pind}{function}{}{}
+    \Pind{\FplayerIndex{$j$}}{
+      Modular division to number the players in a circle\;
+      \Return $\mod((j-1), p) + 1$}
+
+    \BlankLine
+
+  \SetKwProg{Fg}{function}{}{}
+    \Fg{\Fgame{$b, p$}}{}{
+    Initialize the player circle to hold equal number of bills \;
+    \While{more than one player has more than one bill}{
+    Current player takes a \Fturn\;
+    Move to next player in circle\;
+    Increment turns by \( 1 \)\;}}
+    \Return turns
+
+    \BlankLine
+
+    \SetKwProg{Ft}{function}{}{}
+    \Ft{\Fturn{$p$}}{}{
+    Get \( 3 \) random integers from \( 1 \) to \( 6 \) into a vector \;
+    \For{three places in the vector}{
+    \If{current player has bills}{
+    \If{ roll (vector entry) is \( 1 \) or \( 2 \)}{
+    Player to left gets bill, current player loses a bill}
+    \If{ roll (vector entry) is \( 3 \) or \( 4 \)}{
+    Player to right gets bill, current player loses a bill}
+    \If{ roll (vector entry) is \( 5 \) or \( 6 \)}{
+    Center gets bill (don't keep track), current player loses a bill}}}}
+    \Return State of players (the bills each player holds)
+
+    \caption{Supporting functions  for Left-Center-Right}
+
+  \end{algorithm}
+
+\begin{algorithm}[H]
+  \DontPrintSemicolon
+  \KwData{Number of players, number of starting bills, number of
+    simulations}
+  \KwResult{Matrices of mean and variances of game length}
+
+  \BlankLine
+  
+  \SetKwFunction{Fmain}{main}
+    \SetKwProg{Fn}{function}{}{}
+  \Fn{\Fmain{}}{
+    Initialize Mean and Standard Deviation matrices to hold results\;
+    Initialize number of simulations (5000) \;
+    \For{$p \leftarrow 6$ \KwTo $9$}{
+      \For{$b \leftarrow 3$ \KwTo $6$}{
+        Initialize empty vector to hold waiting time for each simulation\;
+        \For{$i \leftarrow 1$ \KwTo number of simulations}{
+          Play \Fgame\;
+    Record results of waiting times for each simulation\;}}}
+    \Return{Mean, Standard Deviation of Waiting Times}}
+  \BlankLine
+
+
+    \caption{Waiting Time Simulation for Left-Center-Right}
+\end{algorithm}
+
+\subsection*{Scripts}
+
+\input{waitingtimeabsorption_scripts}
+
+\hr
+
+\visual{Problems to Work}{../../../../CommonInformation/Lessons/solveproblems.png}
+\section*{Problems to Work for Understanding}
+
+\renewcommand{\theexerciseseries}{}
+\renewcommand{\theexercise}{\arabic{exercise}}
+
+\begin{exercise}
+    A law firm employs three types of lawyers:  junior lawyers, senior
+    lawyers, and partners.  During a given year, there is probability \(
+    0.15 \) of promoting a junior lawyer to senior lawyer and
+    probability \( 0.5 \) that the junior lawyer will leave the firm.
+    There is probability \( 0.20 \) of promoting the senior lawyer to
+    partner and probability \( 0.10 \) that the senior lawyer will leave
+    the firm.  Finally, there is probability \( 0.05 \) that a partner
+    will leave the firm, see Table~%
+    \ref{tab:newwaitingtimeabsorption:lawyers}.  The firm never demotes
+    a lawyer or a partner.
+
+    \begin{table}[htbp]
+        \caption[]{The transition probabilities }
+        \vspace{4mm}
+        \begin{tabular}[tb]
+            {r|cccc}    & leave & junior        & senior        & \\
+                & firm  & lawyer        & lawyer        & partner \\
+            \hline
+            leave firm  & 1     & 0     & 0     & 0 \\
+            junior lawyer       & 0.05  & 0.80  & 0.15  & 0 \\
+            senior lawyer       & 0.10  & 0     & 0.70  & 0.20 \\
+            partner     & 0.05  & 0     & 0     & 0.95
+        \end{tabular}
+        \label{tab:newwaitingtimeabsorption:lawyers}
+    \end{table}
+
+    \begin{enumerate}
+        \item
+            What is the average number of years that a newly hired
+            junior lawyer stays with the firm?
+        \item
+            What is the variance of the number of years a newly hired
+            junior lawyer stays with the firm?
+    \end{enumerate}
+\end{exercise}
+\begin{solution}
+    This leads to the single-step transition matrix \( P \) partitioned
+    into one absorbing state for ``leave firm'' and three transient
+    states:  junior lawyer, senior lawyer, partner
+    \[
+        P =
+        \begin{pmatrix}
+            1 & 0 & 0 & 0 \\
+            0.05 & 0.80 & 0.15 & 0 \\
+            0.10 & 0 & 0.70 & 0.20 \\
+            0.05 & 0 & 0 & 0.95
+        \end{pmatrix}
+        .
+    \] The transient transition matrix is
+    \[
+        T =
+        \begin{pmatrix}
+            0.80 & 0.15 & 0 \\
+            0 & 0.70 & 0.20 \\
+            0 & 0 & 0.95
+        \end{pmatrix}
+        .
+    \] The corresponding fundamental matrix is
+    \[
+        N= (I_3 - T)^{-1} =
+        \begin{pmatrix}
+            5 & 5/2 & 10 \\
+            0 & 10/3 & 40/3 \\
+            0 & 0 & 20
+        \end{pmatrix}
+        .
+    \] The waiting times to absorption are then
+    \[
+        (I-T)^{-1} \mathbf{1} = (35/2, 50/3, 20)^{T}.
+    \]
+
+    Now compute the covariances for the first transient state, junior
+    lawyer.  Using
+    \[
+        \operatorname{diag}
+        {N_{(1, \cdot)}} N + N^T
+        \operatorname{diag}
+        {N_{(1, \cdot)}} - N_{(1, \cdot)}^T N_{(1, \cdot)} -
+        \operatorname{diag}
+        N_{(1, \cdot)}
+    \] we get
+    \[
+        \Cov{Y_{1j}}{Y_{1k}} =
+        \begin{pmatrix}
+            20 & 0 & 0 \\
+            0 & 95/12 & 25/3 \\
+            0 & 25/3 & 290
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            20 & 0 & 0 \\
+            0 & 7.91667 & 8.33333 \\
+            0 & 8.33333 & 290
+        \end{pmatrix}
+        .
+    \] % This does not seem to be correct, but using Thm3 I do get the
+    % following value of 334.58
+    Since \( w_i = \sum_{j=a+1}^{t} Y_{ij} \), using \( \Var{w_i} = \sum_
+    {j=a+1}^t \sum_{l=a+1}^t \Cov{Y_{1j}}{Y_{1k}} \), the variance is
+    the sum of the entries in the covariance matrix.  Hence \( \Var{w_1}
+    = 334.58 \) (in units of \( \text{year}^2 \)).  The standard
+    deviation is \( 18.29 \) years.  As a point of special interest,
+    note that the standard deviation is larger than the mean so that
+    knowing the mean is not enough to understand how long a junior
+    lawyer will be with the firm.
+\end{solution}
+
+\begin{exercise}
+    Consider the random walk of a particle along a straight line from \(
+    -4 \) to \( 4 \) with probability \( 2/3 \) of moving to the right
+    and probability \( 1/3 \) of moving to the left.  The absorbing
+    boundary states are \( -4 \) and \( 4 \).  Compute the vector of
+    variances of waiting times until absorption using Theorem~%
+    \ref{thm:waitingtimeabsorption:varwaittime}.  Compare the result for
+    the walk started at \( 0 \) with the variance computed in the text
+    using the sum of the entries in the covariance matrix.
+\end{exercise}
+\begin{solution}
+    Theorem~%
+    \ref{thm:waitingtimeabsorption:varwaittime} gives the variances of
+    the waiting times as
+    \[
+        \Var{\mathbf{w}} = (2N - I)N\mathbf{1} - (N\mathbf{1})_{\text{sq}}.
+    \] Using the matrix \( N \) from the test example, this is
+    \[
+        \begin{pmatrix}
+            \frac{551592}{7225}\\
+            \frac{476496}{7225}\\
+            \frac{83352}{1445}\\
+            \frac{15264}{289}\\
+            \frac{330312}{7225}\\
+            \frac{247536}{7225}\\
+            \frac{5400}{289}
+        \end{pmatrix}
+    \] or approximately
+    \[
+        \begin{pmatrix}
+            76.34491349480969\\
+            65.95100346020762\\
+            57.68304498269896\\
+            52.81660899653979\\
+            45.71792387543253\\
+            34.26103806228374\\
+            18.68512110726644
+        \end{pmatrix}
+    \] The entry for \( 0 \) rounds to \( 52.81661 \), the same as the
+    variance in the text example.
+\end{solution}
+
+\begin{exercise}
+    Use mathematical induction to show
+    \[
+        P^{m} =
+        \begin{pmatrix}
+            I_a & 0 \\
+            A & T
+        \end{pmatrix}
+        ^{m-1}
+        \begin{pmatrix}
+            I_a & 0 \\
+            A & T
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            I_a & 0 \\
+            (I_t + T + T^2 + \cdots + T^{m-1})A & T^m
+        \end{pmatrix}
+        .
+    \]
+\end{exercise}
+
+\begin{solution}
+    The equality is trivial for the base case \( m=1 \).  Assume the
+    equality holds for \( m-1 \).  Check the multiplication for the
+    lower left block, the other three blocks are easily seen to hold.
+    The multiplication for the lower left block is
+    \[
+        \left( (I_t + T + T^2 + \cdots + T^{m-2})A \right) I_a + T^{m-1}A
+        = (I_t + T + T^2 + \cdots + T^{m-1})A.
+    \] Note \( A I_a = A \).  Using associative and distributive
+    properties for matrix multiplication completes the induction step.
+\end{solution}
+
+\begin{exercise}
+    \begin{enumerate}[label=(\alph*)]
+    \item
+        Use computer software to show the transient state transition
+        probability matrix \( T \) in the random walk example has
+        induced \( 2 \)-norm (or operator norm) less than one for \( p =
+        1/2 \) and \( p = 2/3 \).
+    \item
+        Use computer software to show the transient state transition
+        probability matrix \( T \) in the birthday candle example with \(
+        N=5 \), has induced \( 2 \)-norm (or operator norm) less than \(
+        1 \).
+    \item
+        Use computer software to show the transient state transition
+        probability matrix \( T \) in the two unpainted balls example
+        has induced \( 2 \)-norm (or operator norm) less than \( 1 \).
+    \item
+        (Mathematicians only) Show that if \( T \) is irreducible and
+        row substochastic, with at least one row having sum less than \(
+        1 \), then the induced \( 2 \)-norm (or operator norm) of \( T \)
+        is less than \( 1 \), \( \| T \| < 1 \).
+    \item
+        Use computer software to show the transient state transition
+        probability matrix \( T \) in the four painted balls example has
+        induced \( 2 \)-norm (or operator norm) \emph{greater} than \( 1
+        \).  Explain why the previous theorem is not violated.
+        Nevertheless, show the eigenvalues of the matrix are all less
+        than \( 1 \), so \( T \) is contractive and \( (I-T)^{-1} \)
+        still exists.
+\end{enumerate}
+waitingtimeabsorbtion.tex:1449:begin/end environment name mismatch
+	begin {} at line 0: end {exercise} at line 1449
+waitingtimeabsorbtion.tex:1449:negative environment level at this line: reset to zero
+\end{exercise}
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+    \item
+        With R, for \( p=1/2 \), \texttt{norm(T, type=c("2")) =
+        0.9238795}.  With R, for \( p=2/3 \), \texttt{norm(T, type=c("2"))
+        = 0.9326442}.
+    \item
+        With R, \texttt{norm(T, type=c("2")) = 0.7941471}.
+    \item
+        With R, \texttt{norm(T, type=c("2")) = 0.8660254}.
+    \item
+        Proof lightly adapted from \link{StackExchange -- Substochastic
+        matrix spectral radius}{https://math.stackexchange.com/questions/36828/substochastic-matrix-spectral-radius\#666603}
+        For any state \( i \) and integer \( n \ge 0 \), let \( r_i^n =
+        \sum_{l}(T^n)_{il} \) denote the \( i \)th row sum of \( T^n \).
+        For \( n=1 \), for convenience write \( r_i \) rather than \( r_i^1
+        \).  Since \( T \) is a substochastic transition probability
+        matrix, \( 0 \le r_i^n \le 1 \).
+
+        Let \( l^{\ast} \) be an index with \( r_{l^{\ast}} < 1 \), and
+        note that for \( n \ge 1 \)
+        \[
+            r_{l^{\ast}}^n = \sum_{l} T_{l^{\ast}l} r_l^{n-1} \le \sum_{l}
+            T_{l^{\ast}l} = r_{l^{\ast}} < 1.
+        \]
+
+        By irreducibility, for any \( i \), there is an \( m \) with \(
+        (T^m)_{il^{\ast}}>0 \).  In fact, if \( T \) is an \( N \times N
+        \) matrix, and \( i \ne l^{\ast} \) then take \( m<N \).  (Take
+        the shortest path from \( i \) to \( l^{\ast} \) with positive
+        transition probability).  Since \( (T^{m})_{il} \) puts positive
+        weight on the index \( l=l^{\ast} \),
+        \[
+            r_i^N = \sum_{l} T_{il}^{m} r_l^{N-m} < r_i^m \le 1.
+        \]
+
+        That is, every row sum of \( T^N \) is strictly less than \( 1 \).
+        Now it is possible to show \( T^{jN} \to 0 \) as \( j \to \infty
+        \) and this shows \( T^N \) (and hence \( T \)) cannot have any
+        eigenvalue with modulus \( 1 \).
+    \item
+        Note that if \( \vect{x} = (0,1,0,0)^T \), then \( T\vect{x} = (0,1,1/2,0)
+        \) with \( \| T\vect(x)\| = \sqrt{5}/2 \approx 1.118 > 1 \).  In
+        fact, With R, \texttt{norm(T, type=c("2")) = 1.162299 } but the
+        eigenvalues are \( 0.83333 \), \( 0.50000 \), \( 0 \) and \( 0 \).
+        The previous theorem is not violated because the transient
+        probability transition matrix is not irreducible, it is not
+        possible to reach state \( 1+1+1+1 \).  Note also the converse
+        of the previous theorem is not true:  This matrix has operator
+        norm less than \( 1 \), but it is not irreducible.
+\end{enumerate}
+waitingtimeabsorbtion.tex:1503:begin/end environment name mismatch
+	begin {} at line 0: end {solution} at line 1503
+waitingtimeabsorbtion.tex:1503:negative environment level at this line: reset to zero
+\end{solution}
+
+\begin{exercise}
+    Show \( NT = (I_t - T)^{-1} T = N - I_t \)
+\end{exercise}
+\begin{solution}
+    First note \( NT = TN \) because
+    \begin{align*}
+        T (I_t - T) &= (I_t -T)T \\
+        T &= (I_t - T) T (I_t - T)^{-1} \\
+        (I_t - T)^{-1} T &= T (I_t - T)^{-1} \\
+        NT &= TN
+    \end{align*}
+    Start with \( N = (I_t-T)^{-1} \).  Then
+    \begin{align*}
+        I_t &= N(I_t-T) \\
+        0 &= N - NT - I_t \\
+        T &= N - TN - I_t + T \\
+        T &= (I_t - T) N - (I_t - T) \\
+        T &= (I_t-T)(N - I_t) \\
+        (I_t - T)^{-1} T &= N - I_t
+    \end{align*}
+\end{solution}
+
+\begin{exercise}
+    Under the assumption the induced \( 2 \)-norm (or operator norm) of \(
+    T \) is less than \( 1 \), \( \| T \| < 1 \) prove that
+    \[
+        \sum_{\nu=0}^{\infty} (T^\nu) = (I - T)^{-1}.
+    \]
+
+\end{exercise}
+\begin{solution}
+    Consider
+    \begin{multline*}
+        (I-T)(I + T + T^2 + \cdots + T^m) = (I + T + T^2 + \cdots + T^m)
+        - \\
+        (T + T^2 + \cdots + T^{m+1}) = I - T^{m+1}
+    \end{multline*}
+    Then
+    \[
+        \| (I-T) \sum_{\nu=0}^{m} (T^\nu) - I \| = \| T^{m+1} \| \to 0
+    \] so
+    \[
+        \sum_{\nu=0}^{\infty} (T^\nu) = (I - T)^{-1}.
+    \]
+\end{solution}
+
+\begin{exercise}
+    For the birthday candle problem, prove by induction that the waiting
+    time with \( N \) candles is the \( N \)th harmonic number \( H_N \).
+\end{exercise}
+\begin{solution}
+    With \( 1 \) candle, and the assumption you blow out a random number
+    of candles between one and the number that remain, \( w_1 \) must be
+    \( 1 = H_1 \) and the base case is established.  Next assume
+    \[
+        w_N = H_N = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}
+        {5} + \cdots + \frac{1}{N} = \sum\limits_{\nu=1}^{N} \frac{1}{\nu}
+    \] and
+    \begin{align*}
+        w_{N+1} &= 1 + \frac{1}{N+1} w_1 + \frac{1}{N+1} w_2 + \cdots +
+        \frac{1}{N+1} w_N \\
+        &= 1 + \frac{1}{N+1} \sum\limits_{\nu=1}^{N} w_{\nu} \\
+        &= 1 + \frac{1}{N+1} \sum\limits_{\nu=1}^{N+1} \sum\limits_{j=1}^\nu
+        \frac{1}{j} \\
+        &= 1 + \frac{1}{N+1} \sum\limits_{j=1}^{N} \frac{N-(j-1)}{j} \\
+        &= 1 + \frac{1}{N+1} \sum\limits_{j=1}^{N} \left( \frac{N+1} {j}
+        - 1 \right) \\
+        &= 1 + \sum\limits_{j=1}^{N} \frac{1}{j} -\frac{1}{N+1} (N) \\
+        &= \sum\limits_{j=1}^{N} \frac{1}{j} + \frac{1}{N+1} \\
+        &= w_{N+1}
+    \end{align*}
+\end{solution}
+\hr
+
+\visual{Books}{../../../../CommonInformation/Lessons/books.png}
+\section*{Reading Suggestion:}
+
+\bibliography{../../../../CommonInformation/bibliography}
+
+%   \begin{enumerate}
+%     \item
+%     \item
+%     \item
+%   \end{enumerate}
+
+\hr
+
+\visual{Links}{../../../../CommonInformation/Lessons/chainlink.png}
+\section*{Outside Readings and Links:}
+\begin{enumerate}
+    \item
+        http://www.laurentlessard.com/bookproofs/colorful-balls-puzzle/
+    \item
+    \item
+    \item
+\end{enumerate}
+
+\hr
+
+\section*{\solutionsname} \loadSolutions
+
+\mydisclaim \myfooter
+
+Last modified:  \flastmod
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-master: t
+%%% TeX-master: t
+%%% End:
