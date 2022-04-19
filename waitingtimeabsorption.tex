@@ -7,8 +7,8 @@
 \documentclass[12pt]{article}
 
 \input{../../../../etc/macros}
-%% \input{../../../../etc/mzlatex_macros}
-\input{../../../../etc/pdf_macros}
+\input{../../../../etc/mzlatex_macros}
+%% \input{../../../../etc/pdf_macros}
 
 \bibliographystyle{plain}
 
@@ -1125,7 +1125,7 @@ first-step analysis.
     question.  Results of simulating games with \( 6 \) to \( 9 \)
     players each starting with \( 3 \) to \( 6 \) dollars are in Table~%
     \ref{tab:waitingtimeabsorption:lcrmean} and Table~%
-    \ref{tab:waitingtimeabsorption:lcrmean}. The Riddler says the game
+    \ref{tab:waitingtimeabsorption:lcrvariance}. The Riddler says the game
     with \( X \) players each starting with \( Y \) dollars will last \(
     2(X-2)Y \) turns but does not give a proof.  The simulations give
     means that are roughly consistent with this value.
@@ -1139,8 +1139,8 @@ first-step analysis.
             5      & 38.3244 & 47.4416 & 56.3536 & 65.4438 \\ 
             6      & 44.8394 & 54.9732 & 65.5688 & 75.3548
         \end{tabular}
-        \caption{Mean number of turns in \( 5000 \) simulations of the
-        game with \( X \) players (columns) each with \( Y \) dollars (rows).}
+        \caption{Mean number of turns in $ 5000 $ simulations of the
+        game with $ X $ players (columns) each with $ Y $ dollars (rows).}
         \label{tab:waitingtimeabsorption:lcrmean}
     \end{table}
 
@@ -1154,9 +1154,9 @@ first-step analysis.
             5      & 8.989401  & 9.367077  & 9.878952  & 10.387840 \\ 
             6      & 10.161804 & 10.468601 & 11.080443 & 11.654668
         \end{tabular}
-        \caption{Variance of number of turns in \( 5000 \) simulations
-        of the game with \( X \) players each with \( Y \) dollars.}%
-        \label{tab:waitingtimeabsorption:lcrmean}
+        \caption{Variance of number of turns in $ 5000 $ simulations
+        of the game with $ X $ players each with $ Y $ dollars.}%
+        \label{tab:waitingtimeabsorption:lcrvariance}
     \end{table}
 
 \end{example}
@@ -1659,6 +1659,7 @@ Last modified:  \flastmod
 
 %%% Local Variables:
 %%% mode: latex
+%%% TeX-master: t
 %%% TeX-master: t
 %%% TeX-master: t
 %%% TeX-master: t
